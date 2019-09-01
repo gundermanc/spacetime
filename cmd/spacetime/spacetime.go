@@ -3,8 +3,8 @@
 
 package main
 
-import "fmt"
+import "github.com/gundermanc/spacetime/server"
 
 func main() {
-	fmt.Println("Hello world")
+	server.StartRemoteAccessServer()
 }
