@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'ubuntu-16.04' # examples of other options: 'macOS-10.13', 'vs2017-win2016'
+  vmImage: 'ubuntu-16.04' # TODO: Windows and Mac builds.
 
 variables:
   GOBIN:  '$(GOPATH)/bin' # Go binaries path
@@ -22,6 +22,11 @@ steps:
   workingDirectory: '$(modulePath)'
   displayName: 'go get dependencies'
 
-- script: go test -v ./...
+- script: go build -v ./cmd/spacetime
   workingDirectory: '$(modulePath)'
-  displayName: 'Run tests'
+  displayName: 'Build'
+
+# TODO: run tests.
+# - script: go test -v ./...
+#   workingDirectory: '$(modulePath)'
+#   displayName: 'Run tests'
