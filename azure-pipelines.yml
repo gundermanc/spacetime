@@ -18,11 +18,11 @@ steps:
     echo '##vso[task.prependpath]$(GOROOT)/bin'
   displayName: 'Set up the Go workspace'
 
-- script: go get -v -t -d ./...
+- script: ./init.sh
   workingDirectory: '$(modulePath)'
-  displayName: 'go get dependencies'
+  displayName: 'Initialize build'
 
-- script: go build -v ./cmd/spacetime
+- script: ./build.sh
   workingDirectory: '$(modulePath)'
   displayName: 'Build'
 

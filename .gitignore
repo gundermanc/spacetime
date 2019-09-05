@@ -1,5 +1,12 @@
 # Mac OS X files.
 .DS_Store
+
+# Downloads
+node_modules/*
+
+# Generated
+*/generated/*
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
