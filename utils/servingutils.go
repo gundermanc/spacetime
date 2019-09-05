@@ -19,3 +19,10 @@ func WriteTemplate(w io.Writer, tmplName string, tmplBody string, model interfac
 		log.Fatal(err)
 	}
 }
+
+func Write(w io.Writer, content string) {
+	_, err := w.Write([]byte(content))
+	if err != nil {
+		log.Fatal(err)
+	}
+}

@@ -10,5 +10,6 @@ import (
 // listens for connections to this machine over HTTP.
 func StartRemoteAccessServer() error {
 	registerIndex()
+	registerAssetRoutes()
 	return http.ListenAndServe(":8080", nil)
 }
