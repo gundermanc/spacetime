@@ -1,15 +1,11 @@
 # Download front-end dependencies.
 echo "Downloading front-end dependencies..."
-yarn
+yarn || exit $?
 
 # Download Go code dependencies.
 echo "Downloading dependencies..."
-go get -v -t -d ./...
-echo
+go get -v -t -d ./... || exit $?
 
-# Generate embedded templates.
-echo "Generating embedded templates..."
-rm -rf server/generated
-pushd server/http
-go generate
-popd
+# TODO: are these redundant?
+go get github.com/GeertJohan/go.rice || exit $?
+go get github.com/GeertJohan/go.rice/rice || exit $?

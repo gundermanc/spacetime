@@ -4,12 +4,7 @@ package server
 
 import (
 	"net/http"
-
-	"github.com/gundermanc/spacetime/server/generated"
-	"github.com/gundermanc/spacetime/utils"
 )
-
-//go:generate go run github.com/wlbr/templify -p server -o indextemp.go index.gohtml
 
 type indexViewModel struct {
 	pageViewModel
@@ -23,11 +18,10 @@ func newIndexViewModel(title string, header string) indexViewModel {
 	return indexViewModel{base, header}
 }
 
-func registerIndex() {
+func registerIndexHandler() {
 	http.HandleFunc("/", serverRoot)
 }
 
 func serverRoot(w http.ResponseWriter, r *http.Request) {
-
-	utils.WriteTemplate(w, "index", generated.IndexTemplate(), newIndexViewModel(appName, indexHeader))
+	writeTemplate(w, "index.gohtml", newIndexViewModel(appName, indexHeader))
 }

@@ -3,21 +3,18 @@ package server
 import (
 	"net/http"
 
-	"github.com/gundermanc/spacetime/utils"
-
-	"github.com/gundermanc/spacetime/server/generated"
+	rice "github.com/GeertJohan/go.rice"
 )
 
-func registerAssetRoutes() {
-	http.HandleFunc("/bootstrap.min.css", bootstrapHandler)
-	http.HandleFunc("/bootstrap.min.css.map", bootstrapMapHandler)
-}
+func registerAssetFileServers() {
 
-func bootstrapHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/css")
-	utils.Write(w, generated.BootstrapTemplate())
-}
+	// Map static assets path.
+	httpBox := rice.MustFindBox("http")
+	httpFs := http.StripPrefix("/static/", http.FileServer(httpBox.HTTPBox()))
+	http.Handle("/static/", httpFs)
 
-func bootstrapMapHandler(w http.ResponseWriter, r *http.Request) {
-	utils.Write(w, generated.BootstrapmapTemplate())
+	// Map bootstrap path.
+	bootstrapBox := rice.MustFindBox("../node_modules/bootstrap/dist")
+	bootstrapFs := http.StripPrefix("/static/bootstrap/", http.FileServer(bootstrapBox.HTTPBox()))
+	http.Handle("/static/bootstrap/", bootstrapFs)
 }

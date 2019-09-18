@@ -3,7 +3,9 @@
 
 package main
 
-import "github.com/gundermanc/spacetime/server"
+import (
+	"github.com/gundermanc/spacetime/server"
+)
 
 func main() {
 	server.StartRemoteAccessServer()
